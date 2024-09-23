@@ -10,8 +10,8 @@ const Footer = () => {
             At Prescripto, we provide expert care with compassion, ensuring
             every patient feels valued. Our experienced doctors offer
             personalized medical services tailored to your needs. Whether for
-            routine check-ups or specialized care, we're here to support your
-            health journey. Book your appointment today and experience
+            routine check-ups or specialized care, we{"'"}re here to support
+            your health journey. Book your appointment today and experience
             exceptional care in a welcoming environment.
           </p>
         </div>
@@ -35,7 +35,9 @@ const Footer = () => {
       {/* copyright */}
       <div>
         <hr />
-        <p className="py-5 text-center text-sm">Copyright 2024 @ Prescripto.com - All Right Reserved.</p>
+        <p className="py-5 text-center text-sm">
+          Copyright 2024 @ Prescripto.com - All Right Reserved.
+        </p>
       </div>
     </div>
   );
