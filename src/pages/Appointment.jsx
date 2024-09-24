@@ -6,6 +6,8 @@ import { assets } from "../assets/assets";
 const Appointment = () => {
   const { docId } = useParams();
   const { doctors } = useContext(AppContext);
+  const daysOfWeeks = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
   const [docInfo, setDocInfo] = useState({});
   const [dcoSlots, setDocSlots] = useState([]);
   const [slotIndex, setSlotIndex] = useState(0);
@@ -68,10 +70,6 @@ const Appointment = () => {
     getAvailableSlots();
   }, [docInfo]);
 
-  // useEffect(() => {
-  //   console.log(dcoSlots);
-  // }, [dcoSlots]);
-
   return (
     docInfo && (
       <div>
@@ -109,6 +107,50 @@ const Appointment = () => {
               <span className="text-gray-600">${docInfo.fees}</span>
             </p>
           </div>
+        </div>
+
+        {/* booking slots */}
+        <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
+          <p>Booking Slots</p>
+          <div className="flex gap-3 items-center overflow-x-auto mt-3">
+            {dcoSlots.length &&
+              dcoSlots.map(
+                (item, idx) =>
+                  item[0] && (
+                    <div
+                      onClick={() => setSlotIndex(idx)}
+                      className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${
+                        slotIndex === idx
+                          ? "bg-primary text-white"
+                          : "border border-gray-200"
+                      }`}
+                      key={idx}
+                    >
+                      <p className="">
+                        {item[0] && daysOfWeeks[item[0].dateTime.getDay()]}
+                      </p>
+                      <p>{item[0] && item[0].dateTime.getDate()}</p>
+                    </div>
+                  )
+              )}
+          </div>
+          <div className="flex overflow-x-scroll gap-3 items-center mt-4">
+            {dcoSlots.length &&
+              dcoSlots[slotIndex].map((item, idx) => (
+                <p
+                  onClick={() => setSlotTime(item.time)}
+                  className={`text-sm font-light px-5 py-2 rounded-full cursor-pointer flex-shrink-0  ${
+                    item.time === slotTime
+                      ? "bg-primary text-white"
+                      : "border border-gray-200 text-gray-400"
+                  }`}
+                  key={idx}
+                >
+                  {item.time.toLowerCase()}
+                </p>
+              ))}
+          </div>
+          <button className="bg-primary text-white tex-sm font-light px-14 py-3 rounded-full my-6">Book an appointment</button>
         </div>
       </div>
     )
