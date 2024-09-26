@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const navigate = useNavigate();
   const [showMenu, setShoMenu] = useState(false);
-  const [token, setToken] = useState(false);
+  const [token, setToken] = useState(true);
   return (
     <div className="flex justify-between items-center text-sm py-4 mb-5 border-b border-b-gray-400">
       <img
