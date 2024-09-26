@@ -7,6 +7,7 @@ const Doctors = () => {
   const navigate = useNavigate();
   const { doctors } = useContext(AppContext);
   const [filterDoc, setFilterDoc] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
   const applyFilter = () => {
     if (speciality) {
       setFilterDoc(doctors.filter((doc) => doc.speciality === speciality));
@@ -22,7 +23,19 @@ const Doctors = () => {
     <div>
       <p className="text-gray-600">Browse through the doctors specialist.</p>
       <div className="flex flex-col md:flex-row item-start gap-5 mt-5">
-        <div className="flex flex-col gap-4 text-sm text-gray-600">
+        <button
+          onClick={() => setShowFilter(!showFilter)}
+          className={`py-1 px-3 border rounded sm:hidden transition-all max-w-32 text-sm ${
+            showFilter ? "bg-primary text-white" : ""
+          }`}
+        >
+          Filters
+        </button>
+        <div
+          className={`${
+            showFilter ? "flex" : "hidden sm:flex"
+          }  flex-col gap-4 text-sm text-gray-600`}
+        >
           <p
             onClick={() =>
               speciality === "General physician"
@@ -30,7 +43,9 @@ const Doctors = () => {
                 : navigate("/doctors/General physician")
             }
             className={`w-[94vw] sm:w-auto pr-16 border border-gray-300 rounded transition-all cursor-pointer  pl-3 py-1.5 ${
-              speciality === "General physician" ? "bg-indigo-100 text-black" : ""
+              speciality === "General physician"
+                ? "bg-indigo-100 text-black"
+                : ""
             }`}
           >
             General physician
@@ -90,7 +105,9 @@ const Doctors = () => {
                 : navigate("/doctors/Gastroenterologist")
             }
             className={`w-[94vw] sm:w-auto pr-16 border border-gray-300 rounded transition-all cursor-pointer  pl-3 py-1.5 ${
-              speciality === "Gastroenterologist" ? "bg-indigo-100 text-black" : ""
+              speciality === "Gastroenterologist"
+                ? "bg-indigo-100 text-black"
+                : ""
             }`}
           >
             Gastroenterologist
